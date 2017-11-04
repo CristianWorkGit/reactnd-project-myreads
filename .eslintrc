@@ -1,0 +1,60 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["standard", "standard-react"],
+  "plugins": ["flow-vars", "babel"],
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "Action": false,
+    "FB": false,
+    "gapi": false
+  },
+  "rules": {
+    "semi": [2, "never"],
+    "flow-vars/define-flow-type": 1,
+    "flow-vars/use-flow-type": 1,
+    "arrow-parens": 0,
+    "camelcase": 0,
+    "sort-imports": 0,
+    "class-methods-use-this": 0,
+    "quotes": ["error", "single", { "avoidEscape": true }],
+    "jsx-quotes": ["error", "prefer-double"],
+    "no-catch-shadow": "error",
+    "indent": "off",
+
+    "no-undef": "off",
+    "no-unused-vars": "off",
+    "no-unused-expressions": "off",
+
+    "no-alert": "off",
+    "react/no-unused-prop-types": "off",
+    "react/prop-types": "off",
+    "prefer-promise-reject-errors": "off",
+    "import/first": "off",
+    "no-dupe-keys": "off",
+    "array-callback-return": "off",
+    "no-constant-condition": "off",
+    "import/no-duplicates": "off",
+    "no-duplicate-imports": "off",
+    "space-before-function-paren": "off",
+    "no-useless-constructor": "off",
+    "no-confusing-arrow": "off",
+    "no-script-url": "off",
+    "wrap-regex": "off",
+    "no-useless-escape": "off",
+    "no-empty": "off",
+    "func-names": "off",
+    "promise/param-names": "off",
+    "no-bitwise": "off",
+
+    "react/jsx-no-bind": [
+      2,
+      {
+        "allowArrowFunctions": true,
+        "allowBind": false,
+        "ignoreRefs": false
+      }
+    ]
+  }
+}
