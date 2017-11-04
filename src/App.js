@@ -6,7 +6,7 @@ import BOOKSHELVES from './consts/BOOKSHELVES'
 import './App.css'
 import sortBy from 'sort-by'
 
-class BooksApp extends React.Component {
+class BooksApp extends Component {
   constructor(props) {
     super(props)
     this.state = {
