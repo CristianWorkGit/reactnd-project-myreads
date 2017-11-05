@@ -26,7 +26,9 @@ class Book extends Component {
             <BooksCategory book={book} onUpdateStatus={onUpdateStatus} />
           </div>
           <div className="book-title">{book.title}</div>
-          <div className="book-authors">{book.authors.join(', ')}</div>
+          <div className="book-authors">
+            {book.authors && book.authors.join(', ')}
+          </div>
         </div>
       </li>
     )

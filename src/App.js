@@ -1,10 +1,17 @@
+import _ from 'lodash'
+import escapeRegExp from 'escape-string-regexp'
+import sortBy from 'sort-by'
+
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
+
 import Home from './Home'
-import * as BooksAPI from './BooksAPI'
+import Search from './Search'
 import BOOKSHELVES from './consts/BOOKSHELVES'
+
+import * as BooksAPI from './BooksAPI'
+
 import './App.css'
-import sortBy from 'sort-by'
 
 class BooksApp extends Component {
   constructor(props) {
@@ -12,10 +19,13 @@ class BooksApp extends Component {
     this.state = {
       query: '',
       bookshelves: [],
-      bookSearchResult: {}
+      bookSearchResult: {
+        books: []
+      }
     }
-    this.handleSearch = this.handleSearch.bind(this)
+    this.handleSearch = _.debounce(this.handleSearch.bind(this), 400)
     this.handleUpdateStatus = this.handleUpdateStatus.bind(this)
+    this.hangleInputSearch = this.hangleInputSearch.bind(this)
   }
 
   componentDidMount() {
@@ -28,17 +38,23 @@ class BooksApp extends Component {
     })
   }
 
+  hangleInputSearch(query) {
+    this.setState({ query: query.trim() })
+    this.handleSearch(query)
+  }
+
   handleSearch(query) {
     let bookSearchResult = {}
 
-    BooksAPI.search(query).then(results => {
-      if (results.error || results.books.error) {
+    BooksAPI.search(escapeRegExp(query)).then(results => {
+      if (!results || results.error) {
         bookSearchResult = {
           error: 'Couldn`t find a book for this query, please try again',
           books: []
         }
+      } else {
+        bookSearchResult.books = results
       }
-
       this.setState({ bookSearchResult })
     })
   }
@@ -82,7 +98,7 @@ class BooksApp extends Component {
   }
 
   render() {
-    const { bookshelves } = this.state
+    const { bookshelves, query, bookSearchResult } = this.state
 
     return (
       <div className="app">
@@ -94,6 +110,19 @@ class BooksApp extends Component {
               <Home
                 bookshelves={bookshelves}
                 onUpdateStatus={this.handleUpdateStatus}
+              />
+            )}
+          />
+          <Route
+            path="/search"
+            render={({ history }) => (
+              <Search
+                history={history}
+                query={query}
+                bookSearchResult={bookSearchResult}
+                bookshelves={bookshelves}
+                onUpdateStatus={this.handleUpdateStatus}
+                onSearch={this.hangleInputSearch}
               />
             )}
           />
