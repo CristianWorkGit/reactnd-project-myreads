@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Book from './Book'
 
 class Search extends Component {
-  static propTypes = {
+  static PropTypes = {
     query: PropTypes.string.isRequired,
     bookshelves: PropTypes.array.isRequired,
     bookSearchResult: PropTypes.object.isRequired,

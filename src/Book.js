@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import BooksCategory from './BooksCategory'
 
 class Book extends Component {
-  static propTypes = {
+  static PropTypes = {
     book: PropTypes.object.isRequired,
     onUpdateStatus: PropTypes.func.isRequired
   }

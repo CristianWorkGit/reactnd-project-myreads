@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Bookshelf from './Bookshelf'
 
 class Home extends Component {
-  static propTypes = {
+  static PropTypes = {
     bookshelves: PropTypes.array.isRequired,
     onUpdateStatus: PropTypes.func.isRequired
   }
